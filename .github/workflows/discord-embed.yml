@@ -1,0 +1,97 @@
+name: Discord Embed Notification
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    discord:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Send Discord Embed
+              env:
+                  DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+                  GITHUB_EVENT_PATH: ${{ github.event_path }}
+              run: |
+                  node <<'EOF'
+                  const fs = require('fs');
+                  const https = require('https');
+
+                  const event = JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH, 'utf8'));
+                  const commits = event.commits || [];
+
+                  if (commits.length === 0) {
+                    console.log("No commits found.");
+                    process.exit(0);
+                  }
+
+                  const branch = event.ref ? event.ref.replace('refs/heads/', '') : 'main';
+                  const repo = event.repository;
+                  const repoFullName = repo ? (repo.full_name || `${repo.owner.name}/${repo.name}`) : 'unknown/repository';
+                  const repoUrl = repo ? (repo.html_url || `https://github.com/${repoFullName}`) : 'https://github.com';
+
+                  const count = commits.length;
+                  const cword = count === 1 ? 'commit' : 'commits';
+                  const header = `### [[${repoFullName}]](${repoUrl}) ${count} new ${cword} on ${branch}`;
+
+                  const commitsList = commits.map(commit => {
+                    const shortHash = commit.id.substring(0, 7);
+                    const [message] = commit.message.split('\n');
+                    const username = commit.author.username || commit.author.name;
+                    return `> [${shortHash}](${commit.url}) ${message}`;
+                  }).join('\n');
+
+                  const description = `${header}\n\n${commitsList}`;
+
+                  const firstCommit = commits[0];
+                  const author = firstCommit.author;
+                  const author_data = {
+                    name: author.name || 'Unknown Author',
+                    username: author.username || null,
+                    icon: author.username
+                      ? `https://github.com/${author.username}.png`
+                      : undefined
+                  }
+
+                  const payload = JSON.stringify({
+                    username: 'GitHub',
+                    avatar_url: 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png',
+                    embeds: [{
+                      description: description,
+                      color: 0x0a0a0a,
+                      timestamp: new Date().toISOString(),
+                      author: {
+                        name: author_data.name,
+                        username: author_data.username,
+                        icon_url: author_data.icon
+                      },
+                      footer: {
+                        text: "Commit Logs"
+                      }
+                    }]
+                  });
+
+                  const url = new URL(process.env.DISCORD_WEBHOOK);
+
+                  const options = {
+                    hostname: url.hostname,
+                    path: url.pathname + url.search,
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json',
+                      'Content-Length': Buffer.byteLength(payload)
+                    }
+                  };
+
+                  const req = https.request(options, res => {
+                    console.log(`Discord webhook status: ${res.statusCode}`);
+                  });
+
+                  req.on('error', err => {
+                    console.error('Error sending Discord webhook:', err);
+                  });
+
+                  req.write(payload);
+                  req.end();
+                  EOF
