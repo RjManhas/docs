@@ -23,9 +23,16 @@
         ]
       },
       {
-        "group": "Windows VPS",
+        "group": "Windows",
         "pages": [
-          "windows-vps/add-user-rdp"
+          "windows-vps/add-user-rdp",
+          "windows-vps/fivem-server-setup"
+        ]
+      },
+      {
+        "group": "Linux",
+        "pages": [
+          "linux-vps/fivem-server-setup"
         ]
       },
       {
