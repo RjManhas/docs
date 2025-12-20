@@ -26,19 +26,20 @@
         "group": "Windows",
         "pages": [
           "windows-vps/add-user-rdp",
-          "windows-vps/fivem-server-setup"
+          "windows-vps/fivem-server-setup",
+          "windows-vps/mariadb-setup"
         ]
       },
       {
         "group": "Linux",
         "pages": [
-          "linux-vps/fivem-server-setup"
+          "linux-vps/fivem-server-setup",
+          "linux-vps/mariadb-setup"
         ]
       },
       {
         "group": "Misc",
         "pages": [
-          "misc/mariadb-setup"
         ]
       }
     ],
