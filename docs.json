@@ -19,7 +19,12 @@
       {
         "group": "Game Servers",
         "pages": [
-          "fivem/txadmin-setup"
+          "fivem/txadmin-setup",
+          "game/sftp",
+          "game/2fa",
+          "game/users",
+          "game/backups",
+          "game/databases"
         ]
       },
       {
