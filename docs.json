@@ -19,12 +19,21 @@
       {
         "group": "Game Servers",
         "pages": [
-          "fivem/txadmin-setup",
           "game/sftp",
           "game/2fa",
           "game/users",
           "game/backups",
-          "game/databases"
+          "game/databases",
+          {
+            "group": "FiveM",
+            "expanded": false,
+            "icon": "house",
+            "pages": [
+              "fivem/framework-comparison",
+              "fivem/txadmin-setup",
+              "fivem/setup-resources"
+            ]
+          }
         ]
       },
       {

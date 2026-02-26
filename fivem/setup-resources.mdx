@@ -1,0 +1,41 @@
+---
+title: "Installation of FiveM resources"
+description: "How to setup FiveM resources on CentrixNodes Game Panel"
+icon: "server"
+---
+
+
+## Introduction
+
+Resources are a way you can expand your FiveM server with additional content. Such as scripts, cars, ymaps and more. 
+This is interesting if you want to make your server more unique and personal.
+
+FiveM and its community forums have large variety of resources you can use. You can find some of the most popular resources here: [FiveM Resources](https://forum.cfx.re/c/development/releases/7)
+
+## Preparation
+
+The installtion of resources can either be done via the web file manager or SFTP. You can learn more about how to use SFTP [here](/game/sftp).
+
+<Note>
+Most downloaded resources are often delieved in a compressed format, such as a .zip or .rar file.
+You will need to extract the files before you can use them. You can use programs such as 7ZIP, winrar, winzip. Sometimes file unpackers will include the actually resource files in a subdirectory within the folder. Example: "script_name/script_name/files" Make sure to only use the "script_name/files"
+</Note>
+
+## Installation
+
+### Uploading files
+
+You must now upload the previously extracted files to your FiveM server. Your folder must be uploaded to your servers `resources` folder. 
+
+### Activating resources
+
+To ensure the installed resource is loaded on server startup, you must first start the resource in your `server.cfg` file. This is done via the `start [example_resource]` command.
+
+For example, if you upload a resource with the name `vmenu`, The command will look like this:
+> `start vmenu`
+
+You can also access the `server.cfg` file via the CFG Editor in the txAdmin interface. 
+
+<Note>
+Please ensure the name of your previously created folder is the same as what is found in the start command. Theses names are <b>case sensitive</b>.
+</Note>
