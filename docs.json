@@ -29,7 +29,6 @@
             "expanded": false,
             "icon": "house",
             "pages": [
-              "fivem/framework-comparison",
               "fivem/txadmin-setup",
               "fivem/setup-resources"
             ]
@@ -40,6 +39,7 @@
         "group": "Windows",
         "pages": [
           "windows-vps/add-user-rdp",
+          "windows-vps/fix-installer-policy",
           "windows-vps/fivem-server-setup",
           "windows-vps/mariadb-setup"
         ]

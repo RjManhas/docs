@@ -1,0 +1,57 @@
+---
+title: "Fix Windows Installer Policy Error"
+description: "Resolve 'The system administrator has set policies to prevent this installation' on Windows VPS"
+icon: "wrench"
+---
+
+If you see this error when installing software on your Windows VPS, the **Windows Installer** is being restricted by Group Policy or Local Policy.
+
+<img
+  src="/images/windows/installer-policy-error.png"
+  alt="Windows Installer error: The system administrator has set policies to prevent this installation"
+/>
+
+## Where to fix it
+
+The policy is **"Turn off Windows Installer"** at:
+
+**Computer Configuration** → **Administrative Templates** → **Windows Components** → **Windows Installer** → **"Turn off Windows Installer"**
+
+Check in both places and apply the same fix in each:
+
+1. **Domain Controller (if applicable)**  
+   Edit the GPO that applies to this computer and open the policy above.
+
+2. **Local policies**  
+   On the VPS, run `gpedit.msc` and go to the same path.
+
+In that policy: set it to **Enabled**, then in the dropdown choose **Never**. Use this same setting in both GPO and local policy. Only **Enabled** with **Never** allows all installs; "Not configured" or "Disabled" does not reliably allow installs (on many servers the default is managed-only, so unmanaged installs stay blocked).
+
+<Warning>
+Being a domain admin does not override this. The setting that applies is the one from the GPO scope that targets the computer (or the local policy if no GPO sets it).
+</Warning>
+
+## DisableMSI registry behavior
+
+The policy writes to:
+
+**Registry key:** `HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Installer`  
+**Value:** `DisableMSI`  
+**Type:** `REG_DWORD`
+
+| DisableMSI | Behavior |
+|------------|----------|
+| **Default** (key absent or value not 1 or 2) | **Server 2003, 2003 R2, 2008, 2008 R2:** Installer enabled for managed apps only; unmanaged installs blocked. **XP, Vista, 7:** Installer enabled for all apps. |
+| **0** | Installer enabled for all applications. All install operations allowed. |
+| **1** | Installer disabled for unmanaged applications; enabled for managed. Non-elevated per-user installs blocked. Per-user elevated and per-machine installs allowed. |
+| **2** | Installer always disabled. No installs allowed (including repairs, reinstalls, or on-demand installs). |
+
+If you fix via registry instead of policy: set `DisableMSI` to **0** or delete it under `HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Installer` (and ensure no GPO overwrites it). The consistent fix in policy is **Enabled** → **Never**.
+
+## Reference
+
+[Windows Installer – DisableMSI (Microsoft Learn)](https://learn.microsoft.com/en-us/previous-versions/windows/desktop/msi/disablemsi)
+
+<Check>
+After setting the policy to **Enabled** → **Never** (or setting/removing the registry value), try the installation again. Reboot or run `gpupdate /force` if the change was made via GPO.
+</Check>
