@@ -35,6 +35,12 @@
           }
         ]
       },
+            {
+        "group": "Web Hosting",
+        "pages": [
+          "web/ssh"
+        ]
+      },
       {
         "group": "Windows",
         "pages": [

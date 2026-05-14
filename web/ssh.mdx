@@ -1,0 +1,45 @@
+---
+title: "Connecting To SSH"
+description: "Learn how connect to ssh on our web server."
+icon: "server"
+---
+
+For enhanced security on our shared web hosting servers, we have changed the default SSH port from the standard port `22`.
+
+## How to Connect
+
+To connect to our shared web hosting server via SSH, you will need to specify port `2333` in your SSH command. 
+
+Use the following command structure from your terminal or command prompt:
+
+```bash
+ssh <username>@<shared_server_ip> -p 2333
+```
+
+### Example
+
+If the shared server IP is `192.168.1.50` and your username is `johndoe`, the command would be:
+
+```bash
+ssh johndoe@192.168.1.50 -p 2333
+```
+
+<Warning>
+Make sure to replace `<username>` with your username and `<shared_server_ip>` with the shared web hosting server IP address. You can typically find this information in your welcome email or client area.
+</Warning>
+
+### Using PuTTY
+
+If you are using PuTTY as your SSH client, you can specify the custom port directly in the session configuration screen. Just change the value in the **Port** box to `2333` before clicking Open.
+
+<img
+  src="/images/web/web-putty-ssh-tutorial.png"
+  alt="PuTTY Port Configuration"
+/>
+
+## Why use a custom port?
+Changing the default SSH port is a common security practice. It helps reduce the number of automated brute-force attacks from malicious bots that constantly scan the internet for servers listening on port `22`.
+
+## Support
+
+If you are experiencing issues connecting, please reach out to our support team for assistance.
