@@ -1,7 +1,36 @@
 ---
 title: "How to use Databases"
-description: "Learn how to connect to databases using various methods and tools on our game panel."
+description: "Create a database in the game panel and connect from your server config or a MySQL client. The panel is powered by Pterodactyl."
 icon: "database"
 ---
 
-### COMING SOON
+Our game panel provisions **MySQL** databases that are tied to your game server.
+
+## Open the Databases tab
+
+1. Log in to the **game panel**.
+2. Select your **server**.
+3. Open the **Databases** tab in the server sidebar.
+
+## View your database details
+
+1. Go to the **Databases** tab in your server sidebar.
+2. Locate your existing database in the list.
+3. Click the database entry or **View Details**
+
+The panel will display vital connection information:
+
+- **Host** — the hostname or IP to use in your application or client  
+- **Port** — usually `3306` unless noted otherwise  
+- **Database name**  
+- **Username**  
+- **Password** — click to reveal or copy; you can rotate it if the panel allows
+
+<Warning>
+Treat the password like any production secret. Only paste it into your server config or a trusted client. If it is ever exposed, rotate it from the panel and update every place that still uses the old password.
+</Warning>
+
+
+## Support
+
+If you have issues accessing your database, please feel free to contact us via our support channels.
