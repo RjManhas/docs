@@ -60,6 +60,7 @@
       {
         "group": "Misc",
         "pages": [
+          "misc/vnc-console"
         ]
       }
     ],

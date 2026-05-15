@@ -1,0 +1,82 @@
+---
+title: "VNC console"
+description: "Enable and use VNC in the VPS control panel to access your VPS console when SSH or RDP is not available."
+icon: "display"
+---
+
+VNC lets you connect to your VPS as if you were at the physical console. 
+VNC is especially useful when:
+
+- The VPS is not reachable over SSH or Remote Desktop
+- You need to troubleshoot boot or startup issues
+- You need access during OS installation
+- You want a direct console session
+
+## Step 1 — Log in to the client area
+
+1. Open your browser and go to your provider’s **client area** (billing portal) at [https://billing.centrixnodes.net](https://billing.centrixnodes.net).
+2. Sign in with your account credentials.
+
+## Step 2 — Open your VPS service
+
+1. Open the **Client** menu.
+2. Choose **My Services**.
+3. Select your **VPS** service.
+
+## Step 3 — Open the VPS control panel
+
+On the VPS service page, click **Open VPS Control Panel**. This opens the **VPS Panel** management UI for that server.
+
+## Step 4 — Open the Options tab
+
+In the vps panel, use the tabs at the top. Open **Options**.
+
+## Step 5 — Enable VNC
+
+In **Options**, find the VNC section and click **Enable VNC Access**. the panel creates a **temporary** VNC session for the server.
+
+## Step 6 — Connection details
+
+After VNC is enabled, the panel will show the session details, typically:
+
+- **IP address**
+- **Port**
+- **Password**
+
+You will usually also see **Browser VNC** and **Disable VNC Access**.
+
+## Step 7 — Use Browser VNC
+
+The simplest method is the built-in viewer:
+
+1. Click **Browser VNC**.
+2. Allow the new window or tab if your browser blocks pop-ups.
+3. Use the on-screen console to work on the server.
+
+## What you can do from the console
+
+With VNC you can:
+
+- Reach the login screen
+- Fix networking or firewall mistakes that locked you out
+- Observe or repair boot problems
+- Work through an OS installer
+
+## Disable VNC when done
+
+1. Return to the **Options** tab in vps panel.
+2. Click **Disable VNC Access**.
+
+This ends the session and reduces exposure.
+
+## Common issues
+
+**Browser VNC does not open** — Allow pop-ups, try another browser, or refresh the VPS panel panel.
+
+**Black screen** — The VM may still be booting. If the panel offers a safe reboot option, try that after waiting briefly.
+
+**Keyboard not responding** — Click inside the VNC window, then refresh or restart the VNC session.
+
+## Support
+
+If you cannot open the control panel or VNC after these steps, contact our support team and we will assist you.
