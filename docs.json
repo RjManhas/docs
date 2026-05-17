@@ -9,7 +9,7 @@
   },
   "favicon": "/icon/favicon.svg",
   "navigation": {
-    "groups": [
+    "tabs": [
       {
         "group": "Getting started",
         "pages": [
@@ -94,7 +94,6 @@
   "footer": {
     "socials": {
       "discord": "https://discord.gg/centrixnodes",
-
       "github": "https://github.com/CentrixNodes-LLC"
     }
   }
